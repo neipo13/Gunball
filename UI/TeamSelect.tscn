@@ -1,0 +1,312 @@
+[gd_scene load_steps=14 format=3 uid="uid://bdfd5wf12os0h"]
+
+[ext_resource type="FontFile" uid="uid://b2wvsvyw5672s" path="res://UI/Fonts/jackport.ttf" id="1_sfubt"]
+[ext_resource type="Script" path="res://UI/PlayerManager.gd" id="2_r4qfa"]
+[ext_resource type="Texture2D" uid="uid://bsfidy5y6j2yk" path="res://UI/btns/blue_up.png" id="2_tme2p"]
+[ext_resource type="Texture2D" uid="uid://cjbaybx2uc713" path="res://UI/btns/blue_dn.png" id="3_lqujn"]
+
+[sub_resource type="Theme" id="Theme_brc4o"]
+default_base_scale = 1.0
+default_font = ExtResource("1_sfubt")
+default_font_size = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0wqyh"]
+bg_color = Color(0.411765, 0.631373, 0.592157, 1)
+corner_radius_bottom_right = 20
+corner_detail = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_80rgh"]
+bg_color = Color(0.807843, 0.552941, 0.4, 1)
+corner_radius_bottom_left = 20
+corner_detail = 16
+
+[sub_resource type="Animation" id="Animation_iftl1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_tme2p")]
+}
+
+[sub_resource type="Animation" id="Animation_ngo5d"]
+resource_name = "dn"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("3_lqujn"), ExtResource("3_lqujn")]
+}
+
+[sub_resource type="Animation" id="Animation_cstbx"]
+resource_name = "loop"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_tme2p"), ExtResource("3_lqujn"), ExtResource("2_tme2p")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mr07x"]
+_data = {
+"RESET": SubResource("Animation_iftl1"),
+"dn": SubResource("Animation_ngo5d"),
+"loop": SubResource("Animation_cstbx")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w33gh"]
+bg_color = Color(0.423529, 0.294118, 0.368627, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.288533, 0.192937, 0.248138, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k1yxi"]
+bg_color = Color(0.533333, 0.352941, 0.537255, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 5
+shadow_offset = Vector2(1, 0)
+
+[node name="TeamSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_brc4o")
+script = ExtResource("2_r4qfa")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.796078, 0.772549, 0.917647, 1)
+
+[node name="Blue" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 150.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_0wqyh")
+
+[node name="Orange" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -640.0
+offset_bottom = 150.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_80rgh")
+
+[node name="Top" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 640.0
+offset_right = 1280.0
+offset_bottom = 150.0
+
+[node name="Choose Team" type="RichTextLabel" parent="Top"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0.423529, 0.294118, 0.368627, 1)
+theme_override_fonts/normal_font = ExtResource("1_sfubt")
+theme_override_font_sizes/normal_font_size = 60
+bbcode_enabled = true
+text = "[pulse freq=0.5 ease=5][wave amp=2
+0 freq=1.5]CHOOSE A TEAM"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="hold to start" type="Label" parent="Top"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -101.0
+offset_top = -31.0
+offset_right = 101.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.423529, 0.294118, 0.368627, 1)
+text = "Hold                To Start"
+
+[node name="Btn" type="TextureRect" parent="Top"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -45.0
+offset_top = -40.0
+offset_right = -5.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("2_tme2p")
+
+[node name="BtnAnimator" type="AnimationPlayer" parent="Top/Btn"]
+libraries = {
+"": SubResource("AnimationLibrary_mr07x")
+}
+
+[node name="ProgressBar" type="ProgressBar" parent="Top"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -310.0
+offset_top = 17.0
+offset_right = 310.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_w33gh")
+theme_override_styles/fill = SubResource("StyleBoxFlat_k1yxi")
+value = 25.0
+show_percentage = false
+
+[node name="MinPlayers" type="Label" parent="Top"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -187.0
+offset_top = 60.0
+offset_right = 187.0
+offset_bottom = 91.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.423529, 0.294118, 0.368627, 1)
+text = "need at least 1 player per team"
+
+[node name="Middle" type="ReferenceRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -315.0
+offset_right = 320.0
+offset_bottom = 495.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(320, 405)
+
+[node name="P1" type="Node2D" parent="Middle"]
+position = Vector2(320, 162)
+
+[node name="P2" type="Node2D" parent="Middle"]
+position = Vector2(320, 324)
+
+[node name="P3" type="Node2D" parent="Middle"]
+position = Vector2(320, 486)
+
+[node name="P4" type="Node2D" parent="Middle"]
+position = Vector2(320, 648)
+
+[node name="Left" type="ReferenceRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -315.0
+offset_right = -320.0
+offset_bottom = 495.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(320, 405)
+
+[node name="P1" type="Node2D" parent="Left"]
+position = Vector2(320, 162)
+
+[node name="P2" type="Node2D" parent="Left"]
+position = Vector2(320, 324)
+
+[node name="P3" type="Node2D" parent="Left"]
+position = Vector2(320, 486)
+
+[node name="P4" type="Node2D" parent="Left"]
+position = Vector2(320, 648)
+
+[node name="Right" type="ReferenceRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 320.0
+offset_top = -315.0
+offset_right = 960.0
+offset_bottom = 495.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(320, 405)
+
+[node name="P1" type="Node2D" parent="Right"]
+position = Vector2(320, 162)
+
+[node name="P2" type="Node2D" parent="Right"]
+position = Vector2(320, 324)
+
+[node name="P3" type="Node2D" parent="Right"]
+position = Vector2(320, 486)
+
+[node name="P4" type="Node2D" parent="Right"]
+position = Vector2(320, 648)

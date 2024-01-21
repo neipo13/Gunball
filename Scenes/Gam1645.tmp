@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://qdse06s3yiyk"]
+
+[ext_resource type="PackedScene" uid="uid://dncsnas8rshsy" path="res://Levels/Basic.tscn" id="3_75v6u"]
+[ext_resource type="Script" path="res://Scenes/GameManager.gd" id="4_or0fq"]
+
+[node name="Game" type="Node2D"]
+
+[node name="BasicLevel" parent="." instance=ExtResource("3_75v6u")]
+tileColor = Color(0.423529, 0.294118, 0.368627, 1)
+backgroundColor = Color(0.796078, 0.772549, 0.917647, 1)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)
+position_smoothing_enabled = true
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("4_or0fq")

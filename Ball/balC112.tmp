@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://dcn5ww62q8nai"]
+
+[ext_resource type="Script" path="res://Ball/ball.gd" id="1_75qmk"]
+[ext_resource type="PhysicsMaterial" uid="uid://nuteaxq877y1" path="res://Ball/ball_mat.tres" id="1_b2we5"]
+[ext_resource type="Texture2D" uid="uid://vrgbq46hq1pl" path="res://Ball/img/blue_body_circle.png" id="1_nh32x"]
+[ext_resource type="Shader" path="res://Util/hit_flash.gdshader" id="3_0x57u"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ifqq4"]
+shader = ExtResource("3_0x57u")
+shader_parameter/active = false
+shader_parameter/tint = Color(1, 1, 0, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xuvv6"]
+
+[node name="Ball" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 15
+physics_material_override = ExtResource("1_b2we5")
+angular_damp_mode = 1
+angular_damp = 10.0
+script = ExtResource("1_75qmk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ifqq4")
+texture = ExtResource("1_nh32x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(4.065, 4.065)
+shape = SubResource("CircleShape2D_xuvv6")

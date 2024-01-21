@@ -1,0 +1,66 @@
+[gd_scene load_steps=5 format=3 uid="uid://dheg6ku84jrqq"]
+
+[ext_resource type="FontFile" uid="uid://b2wvsvyw5672s" path="res://UI/Fonts/jackport.ttf" id="1_74mpr"]
+[ext_resource type="Script" path="res://Scenes/Title.gd" id="1_fw035"]
+[ext_resource type="Script" path="res://UI/label_fade.gd" id="2_5coqh"]
+[ext_resource type="Script" path="res://Scenes/LevelTransitionManager.gd" id="3_8ki06"]
+
+[node name="Title" type="Node2D"]
+position = Vector2(0, 2)
+script = ExtResource("1_fw035")
+
+[node name="BgColor" type="ColorRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.411765, 0.631373, 0.592157, 1)
+
+[node name="GUNBALL" type="RichTextLabel" parent="."]
+clip_contents = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = 196.0
+offset_right = 1924.0
+offset_bottom = 596.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("1_74mpr")
+theme_override_font_sizes/normal_font_size = 180
+bbcode_enabled = true
+text = "[center][wave amp=100 freq=5]finger gun face-off"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="PRESS_ANY_BUTTON" type="RichTextLabel" parent="."]
+offset_left = 2.0
+offset_top = 751.0
+offset_right = 1922.0
+offset_bottom = 951.0
+theme_override_fonts/normal_font = ExtResource("1_74mpr")
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "[center]Press Any Button"
+script = ExtResource("2_5coqh")
+speed = 4.16
+fade = true
+
+[node name="LevelTransitionManager" type="Node" parent="."]
+script = ExtResource("3_8ki06")
+
+[node name="Music Attribution" type="Label" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 44.0
+offset_top = 1028.0
+offset_right = 845.0
+offset_bottom = 1051.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_74mpr")
+theme_override_font_sizes/font_size = 24
+text = "Music: Kevin MacLeod (incompetech.com) Licensed under Creative Commons: By Attribution 4.0 License
+I Got a Stick, Funk Game Loop, HoneyBee"

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://drl1px8anqfeo"
+path="res://.godot/imported/Honey Bee.mp3-c80aace2a95faea92bcb7044f034839a.mp3str"
+
+[deps]
+
+source_file="res://Audio/music/Honey Bee.mp3"
+dest_files=["res://.godot/imported/Honey Bee.mp3-c80aace2a95faea92bcb7044f034839a.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=100.0
+beat_count=93
+bar_beats=4

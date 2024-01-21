@@ -1,0 +1,26 @@
+[gd_scene load_steps=18 format=3 uid="uid://cr5fv8wvit4ff"]
+
+[ext_resource type="Script" path="res://Audio/SoundManager.gd" id="1_oma6i"]
+[ext_resource type="AudioStream" uid="uid://c3omfexdv6eve" path="res://Audio/music/I Got a Stick Arr Bryan Teoh.mp3" id="2_rfd5i"]
+[ext_resource type="AudioStream" uid="uid://dhpsxmtlghtx8" path="res://Audio/sfx/cheer2.wav" id="2_vja6w"]
+[ext_resource type="AudioStream" uid="uid://jvdo2tvfm0wc" path="res://Audio/music/Funk Game Loop.mp3" id="3_0umim"]
+[ext_resource type="AudioStream" uid="uid://dyditt3uyn6oo" path="res://Audio/sfx/cheer.wav" id="3_vvicj"]
+[ext_resource type="AudioStream" uid="uid://dsrvuq7f0fngl" path="res://Audio/sfx/confirm.wav" id="4_7or2j"]
+[ext_resource type="AudioStream" uid="uid://drl1px8anqfeo" path="res://Audio/music/Honey Bee.mp3" id="4_txxxr"]
+[ext_resource type="AudioStream" uid="uid://gkmq8lapu01l" path="res://Audio/sfx/escape.wav" id="5_hlu66"]
+[ext_resource type="AudioStream" uid="uid://bsjjdqhx4kxd" path="res://Audio/sfx/game_end.wav" id="6_4j5uy"]
+[ext_resource type="AudioStream" uid="uid://vqrt2sgyqufx" path="res://Audio/sfx/goal1.wav" id="7_47jag"]
+[ext_resource type="AudioStream" uid="uid://cfrm3711llko" path="res://Audio/sfx/goal2.wav" id="8_l8wct"]
+[ext_resource type="AudioStream" uid="uid://c2g0rdakiinb8" path="res://Audio/sfx/hit.wav" id="9_7vbwi"]
+[ext_resource type="AudioStream" uid="uid://vj8r7kidur8r" path="res://Audio/sfx/player_hit.wav" id="10_up5tm"]
+[ext_resource type="AudioStream" uid="uid://c4n0oweg3bqvx" path="res://Audio/sfx/shoot.wav" id="11_juowg"]
+[ext_resource type="AudioStream" uid="uid://ddhy5pgyn4dlh" path="res://Audio/sfx/spawn.wav" id="12_erw73"]
+[ext_resource type="AudioStream" uid="uid://cswx55lcmu0te" path="res://Audio/sfx/team_change.wav" id="13_fuc4c"]
+[ext_resource type="AudioStream" uid="uid://xqc7dqefc1tc" path="res://Audio/sfx/ball_hit.wav" id="14_o4ldd"]
+
+[node name="SoundManager" type="Node"]
+script = ExtResource("1_oma6i")
+SoundEffects = Array[Resource]([ExtResource("2_vja6w"), ExtResource("3_vvicj"), ExtResource("4_7or2j"), ExtResource("5_hlu66"), ExtResource("6_4j5uy"), ExtResource("7_47jag"), ExtResource("8_l8wct"), ExtResource("9_7vbwi"), ExtResource("10_up5tm"), ExtResource("11_juowg"), ExtResource("12_erw73"), ExtResource("13_fuc4c"), ExtResource("14_o4ldd")])
+MainMenuMusic = ExtResource("2_rfd5i")
+TeamSelectMusic = ExtResource("3_0umim")
+GameMusic = ExtResource("4_txxxr")

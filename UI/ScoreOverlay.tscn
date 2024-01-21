@@ -1,0 +1,103 @@
+[gd_scene load_steps=6 format=3 uid="uid://dal3rt7ykg1d8"]
+
+[ext_resource type="FontFile" uid="uid://dd46lu2b60bll" path="res://UI/Fonts/lobster.ttf" id="1_1hold"]
+[ext_resource type="Script" path="res://UI/ScoreOverlay.gd" id="1_yfr46"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0tnw6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_o1kdd"]
+font = ExtResource("1_1hold")
+font_size = 80
+
+[sub_resource type="LabelSettings" id="LabelSettings_l4j3u"]
+font = ExtResource("1_1hold")
+font_size = 80
+
+[node name="ScoreOverlay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yfr46")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -250.0
+offset_right = 250.0
+offset_bottom = 175.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_0tnw6")
+
+[node name="BlueRect" type="ColorRect" parent="Panel"]
+visibility_layer = 16
+z_index = 10
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 25.0
+offset_top = -50.0
+offset_right = 175.0
+offset_bottom = 50.0
+grow_vertical = 2
+color = Color(0.411765, 0.631373, 0.592157, 1)
+
+[node name="BlueScore" type="Label" parent="Panel/BlueRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -50.0
+offset_right = 22.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(22, 50)
+text = "0"
+label_settings = SubResource("LabelSettings_o1kdd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OrangeRect" type="ColorRect" parent="Panel"]
+visibility_layer = 16
+z_index = 10
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -185.0
+offset_top = -50.0
+offset_right = -35.0
+offset_bottom = 50.0
+grow_horizontal = 0
+grow_vertical = 2
+color = Color(0.807843, 0.552941, 0.4, 1)
+
+[node name="OrangeScore" type="Label" parent="Panel/OrangeRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -50.0
+offset_right = 22.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(22, 50)
+text = "0"
+label_settings = SubResource("LabelSettings_l4j3u")
+horizontal_alignment = 1
+vertical_alignment = 1

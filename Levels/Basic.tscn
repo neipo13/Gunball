@@ -1,0 +1,114 @@
+[gd_scene load_steps=10 format=3 uid="uid://dncsnas8rshsy"]
+
+[ext_resource type="Script" path="res://Levels/VisualGenerator.gd" id="1_7n3ai"]
+[ext_resource type="PhysicsMaterial" uid="uid://d0p2gutrotrbj" path="res://Levels/wall_mat.tres" id="1_hfveg"]
+[ext_resource type="Script" path="res://Levels/DrawCollisionShape2D.gd" id="2_mo5ui"]
+[ext_resource type="Shader" path="res://Util/gradient.gdshader" id="3_xfyui"]
+[ext_resource type="Script" path="res://Levels/Goal.gd" id="4_jsw3c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hxy4x"]
+size = Vector2(3500, 500)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x5ew8"]
+size = Vector2(500, 3000)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v08j8"]
+shader = ExtResource("3_xfyui")
+shader_parameter/first_color = Color(0.411765, 0.631373, 0.592157, 1)
+shader_parameter/second_color = Color(0, 0, 0, 1)
+shader_parameter/position = 0.12
+shader_parameter/size = 1.27
+shader_parameter/angle = 270.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r4wfw"]
+size = Vector2(300, 1700)
+
+[node name="BasicLevel" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 15
+physics_material_override = ExtResource("1_hfveg")
+script = ExtResource("1_7n3ai")
+tileColor = Color(0.717647, 0.384314, 0.682353, 1)
+backgroundColor = Color(0, 0.384314, 0.392157, 1)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visibility_layer = 524288
+z_index = -999
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2000.0
+offset_top = -2000.0
+offset_right = 2000.0
+offset_bottom = 2000.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1100)
+shape = SubResource("RectangleShape2D_hxy4x")
+script = ExtResource("2_mo5ui")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1100)
+shape = SubResource("RectangleShape2D_hxy4x")
+script = ExtResource("2_mo5ui")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(1900, 0)
+shape = SubResource("RectangleShape2D_x5ew8")
+script = ExtResource("2_mo5ui")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
+position = Vector2(-1900, 0)
+shape = SubResource("RectangleShape2D_x5ew8")
+script = ExtResource("2_mo5ui")
+
+[node name="Spawn" type="Node2D" parent="."]
+
+[node name="LeftGoal" type="Area2D" parent="."]
+modulate = Color(0.411765, 0.631373, 0.592157, 1)
+material = SubResource("ShaderMaterial_v08j8")
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("4_jsw3c")
+blueTeam = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftGoal"]
+position = Vector2(-1500, 0)
+shape = SubResource("RectangleShape2D_r4wfw")
+debug_color = Color(0, 0.6, 0.701961, 1)
+script = ExtResource("2_mo5ui")
+color = Color(1, 1, 1, 0.74902)
+
+[node name="RightGoal" type="Area2D" parent="."]
+modulate = Color(0.807843, 0.552941, 0.4, 1)
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("4_jsw3c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightGoal"]
+position = Vector2(1500, 0)
+shape = SubResource("RectangleShape2D_r4wfw")
+debug_color = Color(0, 0.6, 0.701961, 1)
+script = ExtResource("2_mo5ui")
+color = Color(1, 1, 1, 0.74902)
+
+[node name="Blue1" type="Node2D" parent="."]
+position = Vector2(-700, -450)
+
+[node name="Blue2" type="Node2D" parent="."]
+position = Vector2(-700, 450)
+
+[node name="Orange1" type="Node2D" parent="."]
+position = Vector2(700, -450)
+
+[node name="Orange2" type="Node2D" parent="."]
+position = Vector2(700, 450)
+
+[connection signal="body_entered" from="LeftGoal" to="LeftGoal" method="_on_body_entered"]
+[connection signal="body_exited" from="LeftGoal" to="LeftGoal" method="_on_body_exited"]
+[connection signal="body_entered" from="RightGoal" to="RightGoal" method="_on_body_entered"]
+[connection signal="body_exited" from="RightGoal" to="RightGoal" method="_on_body_exited"]

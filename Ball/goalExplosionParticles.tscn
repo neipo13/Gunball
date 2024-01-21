@@ -1,0 +1,124 @@
+[gd_scene load_steps=20 format=3 uid="uid://cufducdf12c7e"]
+
+[ext_resource type="Script" path="res://Bullet/hitParticles.gd" id="1_wyh33"]
+[ext_resource type="Texture2D" uid="uid://28frbyil84j1" path="res://Bullet/img/ball.png" id="1_x18gf"]
+[ext_resource type="Texture2D" uid="uid://3xu8bj1ayb7h" path="res://Bullet/img/line.png" id="3_xfnq4"]
+[ext_resource type="Texture2D" uid="uid://jwlflpai8l" path="res://Ball/img/circle_particle (1).png" id="4_nyy68"]
+
+[sub_resource type="Gradient" id="Gradient_srl28"]
+offsets = PackedFloat32Array(0, 0.441667, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ffcky"]
+gradient = SubResource("Gradient_srl28")
+
+[sub_resource type="Curve" id="Curve_v4rjq"]
+_data = [Vector2(0, 1), 0.0, 7.57997, 0, 0, Vector2(0.0953608, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_4u80e"]
+curve = SubResource("Curve_v4rjq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xjyyf"]
+lifetime_randomness = 0.25
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 5.0
+angle_max = 360.0
+spread = 180.0
+initial_velocity_min = 225.0
+initial_velocity_max = 750.0
+gravity = Vector3(0, 0, 0)
+damping_min = 50.0
+damping_max = 100.0
+scale_min = 0.2
+scale_max = 0.4
+scale_curve = SubResource("CurveTexture_4u80e")
+color_ramp = SubResource("GradientTexture1D_ffcky")
+
+[sub_resource type="Curve" id="Curve_u2n8p"]
+_data = [Vector2(0.0128866, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.459406), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_i66g0"]
+curve = SubResource("Curve_u2n8p")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_iop3l"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 400, 1)
+spread = 0.0
+initial_velocity_min = 200.0
+initial_velocity_max = 2000.0
+gravity = Vector3(0, 0, 0)
+damping_min = 0.6
+damping_max = 0.6
+scale_min = 0.2
+scale_max = 2.0
+alpha_curve = SubResource("CurveTexture_i66g0")
+
+[sub_resource type="Curve" id="Curve_u0qux"]
+_data = [Vector2(0, 1), 0.0, 0.195845, 0, 0, Vector2(1, 0), -0.542342, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_pexyp"]
+curve = SubResource("Curve_u0qux")
+
+[sub_resource type="Curve" id="Curve_f5esb"]
+max_value = 6.0
+_data = [Vector2(0, 0), 0.0, 8.4, 0, 0, Vector2(1, 6), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_o00mk"]
+max_value = 6.0
+_data = [Vector2(0, 0), 0.0, 8.4, 0, 0, Vector2(1, 6), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_s4n6b"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_evx0f"]
+curve_x = SubResource("Curve_f5esb")
+curve_y = SubResource("Curve_o00mk")
+curve_z = SubResource("Curve_s4n6b")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_w42r1"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveXYZTexture_evx0f")
+alpha_curve = SubResource("CurveTexture_pexyp")
+
+[node name="GoalExplosionParticles" type="Node2D"]
+script = ExtResource("1_wyh33")
+
+[node name="Pufs" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 80
+process_material = SubResource("ParticleProcessMaterial_xjyyf")
+texture = ExtResource("1_x18gf")
+lifetime = 0.8
+one_shot = true
+explosiveness = 0.83
+
+[node name="Lines" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 40
+process_material = SubResource("ParticleProcessMaterial_iop3l")
+texture = ExtResource("3_xfnq4")
+lifetime = 0.65
+one_shot = true
+explosiveness = 0.65
+
+[node name="Circles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_w42r1")
+texture = ExtResource("4_nyy68")
+lifetime = 0.6
+one_shot = true
+explosiveness = 1.0
+
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]

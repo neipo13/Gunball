@@ -1,0 +1,84 @@
+[gd_scene load_steps=9 format=3 uid="uid://qdse06s3yiyk"]
+
+[ext_resource type="Shader" path="res://Util/shockwave.gdshader" id="1_w86cn"]
+[ext_resource type="PackedScene" uid="uid://dal3rt7ykg1d8" path="res://UI/ScoreOverlay.tscn" id="2_5rbxb"]
+[ext_resource type="PackedScene" uid="uid://dncsnas8rshsy" path="res://Levels/Basic.tscn" id="3_75v6u"]
+[ext_resource type="Script" path="res://Scenes/GameManager.gd" id="4_or0fq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l3jp4"]
+shader = ExtResource("1_w86cn")
+shader_parameter/strength = 0.085
+shader_parameter/center = Vector2(0.5, 0.5)
+shader_parameter/radius = 0.0
+shader_parameter/aberration = 0.485
+shader_parameter/width = 0.08
+shader_parameter/feather = 0.135
+
+[sub_resource type="Animation" id="Animation_ylqdy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DistortionRect:material:shader_parameter/radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_g6pfq"]
+resource_name = "distort"
+length = 0.51
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DistortionRect:material:shader_parameter/radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.51),
+"transitions": PackedFloat32Array(0.5, 2, 1e-05),
+"update": 0,
+"values": [0.0, 1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6mh6l"]
+_data = {
+"RESET": SubResource("Animation_ylqdy"),
+"distort": SubResource("Animation_g6pfq")
+}
+
+[node name="Game" type="Node2D"]
+
+[node name="BasicLevel" parent="." instance=ExtResource("3_75v6u")]
+tileColor = Color(0.423529, 0.294118, 0.368627, 1)
+backgroundColor = Color(0.796078, 0.772549, 0.917647, 1)
+
+[node name="ScoreOverlay" parent="." instance=ExtResource("2_5rbxb")]
+offset_top = -1050.0
+offset_bottom = -1050.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)
+position_smoothing_enabled = true
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("4_or0fq")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DistortionRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_l3jp4")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DistortionPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+libraries = {
+"": SubResource("AnimationLibrary_6mh6l")
+}
